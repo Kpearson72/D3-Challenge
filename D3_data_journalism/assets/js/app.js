@@ -67,7 +67,39 @@ d3.csv("assets/data/data.csv").then(function (censusData) {
     chartGroup.append("g")
         .call(leftAxis);
 
+    // Step 5: Create Circles
+    // ==============================
+    let circlesGroup = chartGroup.selectAll("circle")
+        .data(censusData)
+        .enter()
+        .append("circle")
+        .attr("cx", d => xPovertyScale(d.poverty))
+        .attr("cy", d => yHealthScale(d.healthcare))
+        .attr("r", "10")
+        .classed("stateCircle", true)
+        .attr("stroke-width", "1")
+        .attr("stroke", "black");
+
+    // Step 5: add text
+    // ==============================
+    let circlesLabel =
+        chartGroup.selectAll(null).data(censusData).enter().append('text');
+
+    console.log(circlesLabel)
     
+    circlesLabel
+        .attr("x", function (d) {
+            return xPovertyScale(d.poverty);
+        })
+        .attr("y", function (d) {
+            return yHealthScale(d.healthcare);
+        })
+        .text(function (d) {
+            return d.abbr;
+        })
+        .attr("font-size", "10px")
+        .classed("stateText", true)
+
 
     
 

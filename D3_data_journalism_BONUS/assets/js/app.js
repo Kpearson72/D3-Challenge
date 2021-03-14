@@ -153,6 +153,18 @@ function makeResponsive(){
         return circlesGroup;
 
     }
-
+    // Import Data
+    d3.csv("assets/data/data.csv").then(function (censusData) {
+        
+        // Step 1: Parse Data/Cast as numbers
+        censusData.forEach(function (data) {
+            data.poverty = +data.poverty;
+            data.healthcare = +data.healthcare;
+            data.age = +data.age;
+            data.income = +data.income;
+            data.smokes = +data.smokes;
+            data.obesity = +data.obesity;
+        });
+        console.log(censusData);
 }
 makeResponsive();

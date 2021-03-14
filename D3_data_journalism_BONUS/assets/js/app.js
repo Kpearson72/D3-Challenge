@@ -204,7 +204,8 @@ function makeResponsive(){
         let yAxis = chartGroup.append("g")
             .classed("y-axis",true)
             .call(leftAxis);
-                // Step 5: Create Circles
+
+        // Create Circles
         // ==============================
         let circlesGroup = chartGroup.selectAll(".stateCircle")
             .data(censusData)
@@ -216,7 +217,8 @@ function makeResponsive(){
             .attr("r", "10")
             .classed("stateCircle", true);
 
-// Append Text to Circles
+        // Append text to circles
+        // ==============================
         let textGroup = chartGroup.selectAll(".stateText")
             .data(acsData)
             .enter()
@@ -227,7 +229,35 @@ function makeResponsive(){
             .classed("stateText", true)
             .attr("font-size", "10px")
             .attr("text-anchor", "middle")
-            .attr("fill", "white");            
+            .attr("fill", "white");   
+    
+        // Create Group of 3 xAxis Labels
+        // ==============================
+        let labelsXGroup = chartGroup.append("g")
+        .attr("transform", `translate(${width / 2}, ${height + 20})`);
+
+        // Create axes labels
+        // ==============================
+        let povertyLabel = labelsXGroup.append("text")
+            .attr("x", 0)
+            .attr("y", 20)
+            .attr("value", "poverty") // value to grab for event listener
+            .classed("active", true)
+            .text("In Poverty (%)");
+
+        let ageLabel = labelsXGroup.append("text")
+            .attr("x", 0)
+            .attr("y", 40)
+            .attr("value", "poverty") // value to grab for event listener
+            .classed("inactive", true)
+            .text("Age (Median)");
+
+        let incomeLabel = labelsXGroup.append("text")
+            .attr("x", 0)
+            .attr("y", 60)
+            .attr("value", "poverty") // value to grab for event listener
+            .classed("inactive", true)
+            .text("Household Income (Median)");
 
             
 }

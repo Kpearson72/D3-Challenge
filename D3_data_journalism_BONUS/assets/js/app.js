@@ -1,10 +1,13 @@
-// function to make responsive
+// function to make responsive        
+// ==============================
 function makeResponsive(){
 
     // remove and replace svg after each pick
+     // ==============================
     let svgArea = d3.select("body").select("svg");
 
     // Clear SVG is Not Empty
+    // ==============================
     if (!svgArea.empty()) {
         svgArea.remove();
     }
@@ -23,21 +26,25 @@ function makeResponsive(){
     let height = svgHeight - margin.top - margin.bottom;
 
     // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
+    // ==============================
     let svg = d3.select("#scatter")
         .append("svg")
         .attr("width", svgWidth)
         .attr("height", svgHeight);
     
     // set chartGroup with appending group elements and setting margins
+    // ==============================
     let chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     // Initial Params
+    // ==============================
 
     let chosenXAxis = "poverty";
     let chosenYAxis = "healthcare";
 
-    // function used for updating x-scale upon click on axis label
+    // function used for updating x-scale upon click on axis label        
+    // ==============================
     function xScale(censusData, chosenXAxis) {
         // create scales
         let xLinearScale = d3.scaleLinear()
@@ -48,7 +55,8 @@ function makeResponsive(){
         return xLinearScale;
     }
 
-    // function used for updating y-scale let upon click on axis label
+    // function used for updating y-scale let upon click on axis label        
+    // ==============================
     function yScale(chosenYAxis, censusData) {
         let yLinearScale = d3.scaleLinear()
             .domain([d3.min(censusData, d=> d[chosenYAxis]) * 0.8,
@@ -59,6 +67,7 @@ function makeResponsive(){
     }
 
     // function used for updating xAxis let upon click on axis Label
+    // ==============================
     function renderXAxes(newXScale, xAxis) {
         let bottomAxis = d3.axisBottom(newXScale);
 
@@ -70,6 +79,7 @@ function makeResponsive(){
     }
 
     // function used for updating yAxis let upon click on axis label
+    // ==============================
     function renderYAxes(newYScale, yAxis) {
         let leftAxis = d3.axisLeft(newYScale);
 
@@ -80,6 +90,7 @@ function makeResponsive(){
             return yAxis;
     }
     // function used for updating circles group to new
+    // ==============================
     function setCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
         textGroup.transition()
             .duration(1000)
@@ -91,6 +102,7 @@ function makeResponsive(){
     }
 
     // function used for updating text group to new
+    // ==============================
     function setText(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
         textGroup.transition()
             .duration(1000)
@@ -102,6 +114,7 @@ function makeResponsive(){
     }
 
     // function to update circle group using Tooltip
+    // ==============================
     function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
 
         if (chosenXAxis === "poverty") {
@@ -124,6 +137,7 @@ function makeResponsive(){
         }
 
         // Initialize tool tip
+        // ==============================
         let toolTip = d3.tip()
             .classed("tooltip d3-tip", true)
             .offset([90, 90])
@@ -154,9 +168,11 @@ function makeResponsive(){
 
     }
     // Import Data
+    // ==============================
     d3.csv("assets/data/data.csv").then(function (censusData) {
         
-        // Step 1: Parse Data/Cast as numbers
+        // Parse Data/Cast as numbers
+        // ==============================
         censusData.forEach(function (data) {
             data.poverty = +data.poverty;
             data.healthcare = +data.healthcare;
@@ -168,8 +184,26 @@ function makeResponsive(){
         console.log(censusData);
 
         // xLinearScale function above csv import
+        // ==============================       
         let xLinearScale = xScale(censusData, chosenXAxis);
 
         let yLinearScale = yScale(censusData, chosenYAxis);
+        // Create axis functions
+        // ==============================
+        let bottomAxis = d3.axisBottom(xLinearScale);
+        let leftAxis = d3.axisLeft(yLinearScale);
+
+        // Append Axes to the chart
+        // ==============================
+        // x-axis
+        let xAxis = chartGroup.append("g")
+            .classed("x-axis", true)
+            .attr("transform", `translate(0, ${height})`)
+            .call(bottomAxis);
+        // y-axis
+        let yAxis = chartGroup.append("g")
+            .classed("y-axis",true)
+            .call(leftAxis);
+            
 }
 makeResponsive();

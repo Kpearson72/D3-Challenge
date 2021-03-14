@@ -123,7 +123,36 @@ function makeResponsive(){
             let yLabel = "Smokes (%)";
         }
 
+        // Initialize tool tip
+        let toolTip = d3.tip()
+            .classed("tooltip d3-tip", true)
+            .offset([90, 90])
+            .html(function (d) {
+                return (`<strong>${d.abbr}</strong><br>${xLabel} ${d[chosenXAxis]}<br>${yLabel} ${d[chosenYAxis]}`);
+            });
+        // Create Circles Tooltip in the Chart
+        circlesGroup.call(toolTip);
+        // Create event listeners to display and hide the tooltip
+        circlesGroup.on("mouseover", function (data) {
+            toolTip.show(data, this);
+        })
+         // mouseout Event
+            .on("mouseout", function (data) {
+            toolTip.hide(data);
+            });
 
+        textGroup.call(toolTip);
+        textGroup.on("mouseover", function (data){
+            toolTip.show(data,this);
+        })
+            //mouse out event
+            .on("mouseout",function(data){
+                toolTip, hide(data);
+            });
+
+        return circlesGroup;
+
+    }
 
 }
 makeResponsive();

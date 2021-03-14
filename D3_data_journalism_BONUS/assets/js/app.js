@@ -57,7 +57,7 @@ function makeResponsive(){
 
     // function used for updating y-scale let upon click on axis label        
     // ==============================
-    function yScale(chosenYAxis, censusData) {
+    function yScale(censusData, chosenYAxis,) {
         let yLinearScale = d3.scaleLinear()
             .domain([d3.min(censusData, d=> d[chosenYAxis]) * 0.8,
             d3.max(censusData, d=> d[chosenYAxis]) * 1.2
@@ -92,12 +92,10 @@ function makeResponsive(){
     // function used for updating circles group to new
     // ==============================
     function setCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
-        textGroup.transition()
+        circlesGroup.transition()
             .duration(1000)
-            .attr("x", d => newXScale(d[chosenXAxis]))
-            .attr("y", d => newYScale(d[chosenYAxis]))
-            .attr("text-anchor", "middle");
-
+            .attr("cx", d => newXScale(d[chosenXAxis]))
+            .attr("cy", d => newYScale(d[chosenYAxis]));
         return circlesGroup;
     }
 
@@ -109,8 +107,7 @@ function makeResponsive(){
             .attr("x", d => newXScale(d[chosenXAxis]))
             .attr("y", d => newYScale(d[chosenYAxis]))
             .attr("text-anchor", "middle");
-
-        return circlesGroup;
+        return textGroup;
     }
 
     // function to update circle group using Tooltip
@@ -220,7 +217,7 @@ function makeResponsive(){
         // Append text to circles
         // ==============================
         let textGroup = chartGroup.selectAll(".stateText")
-            .data(acsData)
+            .data(censusData)
             .enter()
             .append("text")
             .attr("x", d => xLinearScale(d[chosenXAxis]))
@@ -295,7 +292,7 @@ function makeResponsive(){
 
         // updateToolTip function above csv import
         // ==============================
-        let circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup);
+
 
         labelsXGroup.selectAll("text")
             .on("click",function(){

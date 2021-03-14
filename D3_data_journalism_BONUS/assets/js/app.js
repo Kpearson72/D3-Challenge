@@ -248,14 +248,14 @@ function makeResponsive(){
         let ageLabel = labelsXGroup.append("text")
             .attr("x", 0)
             .attr("y", 40)
-            .attr("value", "poverty") // value to grab for event listener
+            .attr("value", "age") // value to grab for event listener
             .classed("inactive", true)
             .text("Age (Median)");
 
         let incomeLabel = labelsXGroup.append("text")
             .attr("x", 0)
             .attr("y", 60)
-            .attr("value", "poverty") // value to grab for event listener
+            .attr("value", "income") // value to grab for event listener
             .classed("inactive", true)
             .text("Household Income (Median)");
 
@@ -268,25 +268,28 @@ function makeResponsive(){
         // ==============================
         let healthcareLabel = labelsYGroup.append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left + 70)
-            .attr("x", 0 - (height / 2))
-            
+            .attr("y", - 30)
+            .attr("x",  0)
+            .classed("active", true)
             .classed("axis-text", true)
+            .attr("value", "health") // value to grab for event listener
             .text("Lacks Healthcare (%)");
 
         let smokesLabel = labelsYGroup.append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left + 50)
-            .attr("x", 0 - (height / 2))
-
+            .attr("y", -50)
+            .attr("x", 0)
+            .classed("inactive", true)
+            .attr("value", "smokes") // value to grab for event listener
             .classed("axis-text", true)
             .text("Smokes (%)");
 
         let obeseLabel = labelsYGroup.append("text")
             .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left + 30)
-            .attr("x", 0 - (height / 2))
-        
+            .attr("y", -70)
+            .attr("x", 0)
+            .classed("inactive", true)
+            .attr("value", "obesity") // value to grab for event listener
             .classed("axis-text", true)
             .text("Obese (%)");
 

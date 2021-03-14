@@ -137,27 +137,31 @@ function makeResponsive() {
         // Initialize tool tip
         // ==============================
         let toolTip = d3.tip()
-            .classed("tooltip d3-tip", true)
+            // .classed("tooltip", true)
+            // .classed("d3-tip",true)
+            .attr("class", "tooltip d3-tip")
             .offset([90, 90])
             .html(function (d) {
                 return (`<strong>${d.abbr}</strong><br>${xLabel} ${d[chosenXAxis]}<br>${yLabel} ${d[chosenYAxis]}`);
             });
-        // Create Circles Tooltip in the Chart
+        // Create Circles 
         circlesGroup.call(toolTip);
-        // Create event listeners to display and hide the tooltip
+        // event listeners to display and hide the tooltip
         circlesGroup.on("mouseover", function (data) {
             toolTip.show(data, this);
         })
          // mouseout Event
             .on("mouseout", function (data) {
-            toolTip.hide(data);
+                toolTip.hide(data);
             });
 
+        // create text tooltip
         textGroup.call(toolTip);
+        // event listeners to display and hide the tooltip
         textGroup.on("mouseover", function (data){
             toolTip.show(data,this);
         })
-            //mouse out event
+            //mouseout event
             .on("mouseout",function(data){
                 toolTip, hide(data);
             });
@@ -271,7 +275,7 @@ function makeResponsive() {
                 .attr("x",  0)
                 .classed("active", true)
                 .classed("axis-text", true)
-                .attr("value", "health") // value to grab for event listener
+                .attr("value", "healthcare") // value to grab for event listener
                 .text("Lacks Healthcare (%)");
 
             let smokesLabel = labelsYGroup.append("text")
@@ -295,6 +299,9 @@ function makeResponsive() {
             // updateToolTip function above csv import
             // ==============================
             // let circlesGroup = updateToolTip(chosenXAxis, chosenYAxis,circlesGroup,textGroup);
+
+            // event listeners
+            // ==============================
             labelsXGroup.selectAll("text")
                 .on("click",function(){
                     let value = d3.select(this).attr("value");
@@ -363,7 +370,7 @@ function makeResponsive() {
                         textGroup = renderText(textGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
                         // updating Tooltips 
                         circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup);
-                    if (chosenYAxis === "health") {
+                    if (chosenYAxis === "healthcare") {
                         heathLabel
                             .classed("active", true)
                             .classed("inactive", false);

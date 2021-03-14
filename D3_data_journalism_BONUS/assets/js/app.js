@@ -236,7 +236,7 @@ function makeResponsive(){
         let labelsXGroup = chartGroup.append("g")
         .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
-        // Create axes labels
+        // Create axes labels for x
         // ==============================
         let povertyLabel = labelsXGroup.append("text")
             .attr("x", 0)
@@ -258,6 +258,37 @@ function makeResponsive(){
             .attr("value", "poverty") // value to grab for event listener
             .classed("inactive", true)
             .text("Household Income (Median)");
+
+        // Create Group of 3 yAxis Labels
+        // ==============================
+        let labelsYGroup = chartGroup.append("g")
+            .attr("transform", `translate`);
+
+        // Create axes labels for y
+        // ==============================
+        let healthcareLabel = labelsYGroup.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left + 70)
+            .attr("x", 0 - (height / 2))
+            
+            .classed("axis-text", true)
+            .text("Lacks Healthcare (%)");
+
+        let smokesLabel = labelsYGroup.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left + 50)
+            .attr("x", 0 - (height / 2))
+
+            .classed("axis-text", true)
+            .text("Smokes (%)");
+
+        let obeseLabel = labelsYGroup.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left + 30)
+            .attr("x", 0 - (height / 2))
+        
+            .classed("axis-text", true)
+            .text("Obese (%)");
 
             
 }

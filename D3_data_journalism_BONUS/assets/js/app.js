@@ -301,17 +301,17 @@ function makeResponsive(){
             .on("click",function(){
                 let value = d3.select(this).attr("value");
                 if (value !== chosenXAxis) {
-                    // Replaces chosenXAxis with Value
+                    // replaces Value
                     chosenXAxis = value;
-                    // Updates xScale for New Data
+                    // updating xScale for new census data
                     xLinearScale = xScale(censusData, chosenXAxis);
-                    // Updates xAxis with Transition
+                    // updating xAxis 
                     xAxis = renderXAxes(xLinearScale, xAxis);
-                    // Updates Circles with New Values
+                    // updating Circles 
                     circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
-                    // Updates Text with New Values
+                    // updating Text 
                     textGroup = renderText(textGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
-                    // Updates Tooltips with New Information
+                    // updating Tooltips 
                     circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup);
                 if (chosenXAxis === "poverty") {
                     povertyLabel
@@ -340,7 +340,7 @@ function makeResponsive(){
                         .classed("active", false)
                         .classed("inactive", true);
                     incomeLabel
-                        .classed("active", true)
+                        .classed("active", false)
                         .classed("inactive", false);
                     ageLabel
                         .classed("active", true)
@@ -349,6 +349,59 @@ function makeResponsive(){
             }
                 
         });      
+
+        labelsYGroup.selectAll("text")
+        .on("click",function(){
+            let value = d3.select(this).attr("value");
+            if (value !== chosenYAxis) {
+                // replaces Value
+                chosenYAxis = value;
+                // updating xScale for new census data
+                xLinearScale = xScale(censusData, chosenYAxis);
+                // updating xAxis 
+                yAxis = renderXAxes(yLinearScale, xAxis);
+                // updating Circles 
+                circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
+                // updating Text 
+                textGroup = renderText(textGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis)
+                // updating Tooltips 
+                circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup);
+            if (chosenyAxis === "poverty") {
+                heathLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+                obesityLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                smokeslabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+            }
+            else if (chosenyAxis === "poverty"){
+                healthLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                obesityLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+                smokesLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+            }
+            else {
+                healthLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                obesityLabel
+                    .classed("active", false)
+                    .classed("inactive", false);
+                smokesLabel
+                    .classed("active", true)
+                    .classed("inactive", true);
+            }
+        }
+            
+    });      
             
 }
 makeResponsive();

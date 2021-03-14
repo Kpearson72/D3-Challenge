@@ -1,6 +1,6 @@
 // function to make responsive        
 // ==============================
-function makeResponsive(){
+function makeResponsive() {
 
     // remove and replace svg after each pick
      // ==============================
@@ -12,8 +12,8 @@ function makeResponsive(){
         svgArea.remove();
     }
 
-    let svgWidth = 960;
-    let svgHeight = 500;
+    let svgWidth = 980;
+    let svgHeight = 600;
 
     let margin = {
         top: 20,
@@ -35,7 +35,7 @@ function makeResponsive(){
     // set chartGroup with appending group elements and setting margins
     // ==============================
     let chartGroup = svg.append("g")
-    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+        .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     // Initial Params
     // ==============================
@@ -209,7 +209,7 @@ function makeResponsive(){
             .enter()
             .append("circle")
             .attr("cx", d => xLinearScale(d[chosenXAxis]))
-            .attr("cy", d => yLinearScale(d.healthcare))
+            .attr("cy", d => yLinearScale(d[chosenYAxis]))
             .attr("opacity", ".80")
             .attr("r", "10")
             .classed("stateCircle", true);
@@ -231,7 +231,7 @@ function makeResponsive(){
         // Create Group of 3 xAxis Labels
         // ==============================
         let labelsXGroup = chartGroup.append("g")
-        .attr("transform", `translate(${width / 2}, ${height + 20})`);
+            .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
         // Create axes labels for x
         // ==============================
@@ -259,7 +259,7 @@ function makeResponsive(){
         // Create Group of 3 yAxis Labels
         // ==============================
         let labelsYGroup = chartGroup.append("g")
-            .attr("transform", `translate`);
+            .attr("transform", `translate(-25, ${height / 2})`);
 
         // Create axes labels for y
         // ==============================

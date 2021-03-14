@@ -50,6 +50,25 @@ d3.csv("assets/data/data.csv").then(function (censusData) {
 
 
 
+    // Step 3: Create axis functions
+    // ==============================
+    let bottomAxis = d3.axisBottom(xPovertyScale).ticks(9);
+    let leftAxis = d3.axisLeft(yHealthScale).ticks(12);
+
+    // Step 4: Append Axes to the chart
+    // ==============================
+    // Add x-axis
+    chartGroup.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(bottomAxis)
+        
+
+    // Add y1-axis to the left side of the display
+    chartGroup.append("g")
+        .call(leftAxis);
+
+    
+
     
 
 }).catch(function (error) {

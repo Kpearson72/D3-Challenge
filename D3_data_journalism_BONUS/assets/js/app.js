@@ -204,6 +204,33 @@ function makeResponsive(){
         let yAxis = chartGroup.append("g")
             .classed("y-axis",true)
             .call(leftAxis);
+                // Step 5: Create Circles
+        // ==============================
+        let circlesGroup = chartGroup.selectAll(".stateCircle")
+            .data(censusData)
+            .enter()
+            .append("circle")
+            .attr("cx", d => xLinearScale(d[chosenXAxis]))
+            .attr("cy", d => yLinearScale(d.healthcare))
+            .attr("opacity", ".80")
+            .attr("r", "10")
+            .classed("stateCircle", true);
+
+// Append Text to Circles
+        let textGroup = chartGroup.selectAll(".stateText")
+            .data(acsData)
+            .enter()
+            .append("text")
+            .attr("x", d => xLinearScale(d[chosenXAxis]))
+            .attr("y", d => yLinearScale(d[chosenYAxis] * .98))
+            .text(d => (d.abbr))
+            .classed("stateText", true)
+            .attr("font-size", "10px")
+            .attr("text-anchor", "middle")
+            .attr("fill", "white");            
+
             
 }
 makeResponsive();
+
+d3.select(window).on("resize", makeResponsive);

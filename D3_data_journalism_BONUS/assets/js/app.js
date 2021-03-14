@@ -166,5 +166,10 @@ function makeResponsive(){
             data.obesity = +data.obesity;
         });
         console.log(censusData);
+
+        // xLinearScale function above csv import
+        let xLinearScale = xScale(censusData, chosenXAxis);
+
+        let yLinearScale = yScale(censusData, chosenYAxis);
 }
 makeResponsive();

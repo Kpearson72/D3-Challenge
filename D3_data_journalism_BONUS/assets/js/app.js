@@ -28,7 +28,26 @@ function makeResponsive(){
         .append("svg")
         .attr("width", svgWidth)
         .attr("height", svgHeight);
+    
+    // set chartGroup with appending group elements and setting margins
+    let chartGroup = svg.append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+    // Initial Params
+
+    let chosenXAxis = "poverty";
+    let chosenYAxis = "healthcare";
+
+    // function used for updating x-scale upon click on axis label
+    function xScale(censusData, chosenXAxis) {
+        // create scales
+        let xLinearScale = d3.scaleLinear()
+            .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.8,
+            d3.max(censusData, d => d[chosenXAxis]) *1.2 
+            ])
+            .range([0, width]);
+        return xLinearScale;
+    }
 
 
 }

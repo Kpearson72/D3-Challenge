@@ -66,7 +66,7 @@ function yScale(censusData, chosenYAxis,) {
 
 // function used for updating xAxis var upon click on axis Label
 // ==============================
-function setAxis(newXScale, xAxis) {
+function renderXAxis(newXScale, xAxis) {
     var bottomAxis = d3.axisBottom(newXScale);
 
     xAxis.transition()
@@ -316,7 +316,7 @@ d3.csv("assets/data/data.csv")
                     // updating xScale for new census data
                     xLinearScale = xScale(censusData, chosenXAxis);
                     // updating xAxis 
-                    xAxis = setAxis(xLinearScale, xAxis);
+                    xAxis = renderXAxis(xLinearScale, xAxis);
                     // updating Circles 
                     circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
                     // updating Text 

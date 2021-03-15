@@ -233,8 +233,8 @@ function makeResponsive() {
                 .attr("y", d => yLinearScale(d[chosenYAxis]))
                 .text(d => (d.abbr))
                 .classed("stateText", true)
-                .attr("font-size", "10px")
-                .attr("text-anchor", "middle")
+                .attr("font-size", "12px")
+                .attr("text-anchor", "center")
                 .attr("fill", "white");   
             console.log(textGroup);
         

@@ -12,13 +12,13 @@ function makeResponsive() {
         svgArea.remove();
     }
 
-    var svgWidth = 950;
+    var svgWidth = 980;
     var svgHeight = 600;
 
     var margin = {
         top: 20,
         right: 40,
-        bottom: 80,
+        bottom: 120,
         left: 120
     };
 
@@ -48,7 +48,7 @@ function makeResponsive() {
     function xScale(censusData, chosenXAxis) {
         // create scales
         var xLinearScale = d3.scaleLinear()
-            .domain([d3.min(censusData, d => d[chosenXAxis]-1),
+            .domain([d3.min(censusData, d => d[chosenXAxis])-1,
             d3.max(censusData, d => d[chosenXAxis])+ 2
             ])
             .range([0, width]);
@@ -68,7 +68,7 @@ function makeResponsive() {
 
     // function used for updating xAxis var upon click on axis Label
     // ==============================
-    function renderXAxes(newXScale, xAxis) {
+    function setAxis(newXScale, xAxis) {
         var bottomAxis = d3.axisBottom(newXScale);
 
         xAxis.transition()
@@ -127,11 +127,11 @@ function makeResponsive() {
         if (chosenYAxis === "healthcare") {
             var yLabel = "Lacks Healthcare (%)";
         }
-        else if (chosenYAxis === "obesity") {
-            var yLabel = "Obese (%)";
+        else if (chosenYAxis === "smokes") {
+            var yLabel = "Smokes (%)";
         }
         else {
-            var yLabel = "Smokes (%)";
+            var yLabel = "Obese (%)";
         }
 
         // Initialize tool tip
@@ -140,9 +140,9 @@ function makeResponsive() {
             // .classed("tooltip", true)
             // .classed("d3-tip",true)
             .attr("class", "tooltip d3-tip")
-            .offset([90, 90])
+            .offset([80, 80])
             .html(function (d) {
-                return (`<strong>${d.abbr}</strong><br>${xLabel} ${d[chosenXAxis]}<br>${yLabel} ${d[chosenYAxis]}`);
+                return (`<strong>${d.state}</strong><br>${xLabel} ${d[chosenXAxis]}<br>${yLabel} ${d[chosenYAxis]}`);
             });
         // Create Circles 
         circlesGroup.call(toolTip);
@@ -152,7 +152,7 @@ function makeResponsive() {
         })
          // mouseout Event
             .on("mouseout", function (data) {
-                toolTip.style(data, "none");
+                toolTip.hide(data);
             });
         
         
@@ -164,7 +164,7 @@ function makeResponsive() {
         })
             //mouseout event
             .on("mouseout",function(data){
-                toolTip.style(data, "none");
+                toolTip.hide(data);
             });
 
         return circlesGroup;
@@ -219,7 +219,7 @@ function makeResponsive() {
                 .attr("cx", d => xLinearScale(d[chosenXAxis]))
                 .attr("cy", d => yLinearScale(d[chosenYAxis]))
                 .attr("opacity", ".80")
-                .attr("r", "10")
+                .attr("r", "13")
                 .classed("stateCircle", true);
             console.log(circlesGroup);
 
@@ -230,7 +230,7 @@ function makeResponsive() {
                 .enter()
                 .append("text")
                 .attr("x", d => xLinearScale(d[chosenXAxis]))
-                .attr("y", d => yLinearScale(d[chosenYAxis] * .98))
+                .attr("y", d => yLinearScale(d[chosenYAxis]))
                 .text(d => (d.abbr))
                 .classed("stateText", true)
                 .attr("font-size", "10px")
@@ -318,7 +318,7 @@ function makeResponsive() {
                         // updating xScale for new census data
                         xLinearScale = xScale(censusData, chosenXAxis);
                         // updating xAxis 
-                        xAxis = renderXAxes(xLinearScale, xAxis);
+                        xAxis = setAxis(xLinearScale, xAxis);
                         // updating Circles 
                         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
                         // updating Text 

@@ -72,7 +72,7 @@ Your final product will be assessed on the following metrics:
 
 * Coherency of scatter plot (labels, ticks)
 
-* Visual attraction
+* Visual attraction - [D3 Times Page](https://kpearson72.github.io/D3_data_journalism_BONUS/)
 
 * Professionalism
 

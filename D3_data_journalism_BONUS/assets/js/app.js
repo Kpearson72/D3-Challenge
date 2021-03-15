@@ -17,9 +17,9 @@ function makeResponsive() {
 
     var margin = {
         top: 20,
-        right: 40,
-        bottom: 120,
-        left: 120
+        right: 20,
+        bottom: 100,
+        left: 110
     };
 
     var width = svgWidth - margin.left - margin.right;
@@ -218,7 +218,7 @@ function makeResponsive() {
                 .append("circle")
                 .attr("cx", d => xLinearScale(d[chosenXAxis]))
                 .attr("cy", d => yLinearScale(d[chosenYAxis]))
-                .attr("opacity", ".80")
+                .attr("opacity", ".9")
                 .attr("r", "13")
                 .classed("stateCircle", true);
             console.log(circlesGroup);

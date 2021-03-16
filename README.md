@@ -18,7 +18,7 @@ The data set included with the assignment is based on 2014 ACS 1-year estimates 
 
 Using the D3 techniques we learned in class, a scatter plot that represents each state with circle elements was created. The code for the above can be found in  [`app.js`](https://github.com/Kpearson72/D3-Challenge/blob/main/D3_data_journalism/assets/js/app.js) file in D3__data_journamlism directory under [D3-Challenge](https://github.com/Kpearson72/D3-Challenge) github repository. I used the `d3.csv` function to read the data: [`data.csv`](https://github.com/Kpearson72/D3-Challenge/blob/main/D3_data_journalism/assets/data/data.csv). The final result is the scatterplot found below.
 
-![Core Assignment: Dabbler](D3_data_journalism/Images/127.0.0.1_5501_D3_data_journalism_index.html(Laptop%20with%20HiDPI%20screen).png)
+![Core Assignment: Dabbler](D3_data_journalism/Images/Core_Assignment.png)
 
 Requirements:
 * Include state abbreviations in the circles.
@@ -32,7 +32,7 @@ Requirements:
 ### [Bonus: Impress the Boss](https://github.com/Kpearson72/D3-Challenge/tree/main/D3_data_journalism_BONUS)
 Check out the github [D3 Times Page](https://kpearson72.github.io/D3_data_journalism_BONUS/)
 
-![animated-gif](D3_data_journalism_BONUS/Images/Bonus.gif)
+![animated-gif](D3_data_journalism_BONUS/Images/Gyazo_video_Bonus.gif)
 
 #### 1. More Data, More Dynamics
 
